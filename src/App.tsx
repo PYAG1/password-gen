@@ -1,6 +1,7 @@
 import { useState } from "react";
 import styled from "styled-components";
 import { FaArrowRight, FaRegCopy } from "react-icons/fa";
+import arrowRight from "../src/assets/icon-arrow-right.svg"
 
 const colors = {
   background: "#18171F",
@@ -11,6 +12,10 @@ const colors = {
   red: "#F64A4A",
   orange: "#FB7C58",
   yellow: "#F8CD65",
+  tooWeak: '#F64A4A',
+  weak: '#FB7C58',
+  medium: '#F8CD65',
+  strong: '#A4FFAF',
 };
 
 const Wrapper = styled.div`
@@ -28,6 +33,10 @@ const AppContainer = styled.div`
   width: 100%;
   text-align: center;
   flex: 1;
+  @media (min-width: 768px){
+ max-width:500px;
+}
+
 `;
 
 const Title = styled.h3`
@@ -91,7 +100,11 @@ const CharacterCount = styled.p`
   font-size: 1.8em;
   color: ${colors.green};
 `;
-
+const ArrowRightIcon = () => (
+  <svg width="12" height="12" xmlns="http://www.w3.org/2000/svg">
+    <path fill="#24232C" d="m5.106 12 6-6-6-6-1.265 1.265 3.841 3.84H.001v1.79h7.681l-3.841 3.84z" />
+  </svg>
+);
 const GenerateButton = styled.button`
   width: 100%;
   background: ${colors.green};
@@ -110,9 +123,12 @@ const GenerateButton = styled.button`
 
   &:hover {
     background-color: transparent; /* Semi-transparent green on hover */
-border:2px solid ${colors.green};
-color:${colors.green};
+    border: 2px solid ${colors.green};
+    color: ${colors.green};
 
+    svg path {
+      fill: #A4FFAF; /* Change arrow color on hover */
+    }
   }
 `;
 
@@ -135,6 +151,8 @@ const PasswordStrengthSection = styled.section`
   display:flex;
   justify-content:space-between
 `;
+
+
 interface CheckBoxOption {
   id: number;
   text: string;
@@ -195,6 +213,59 @@ const CheckBoxInput = styled.input.attrs({ type: "checkbox" })`
 `;
 
 
+
+const BarsContainer = styled.div`
+  display: flex;
+  gap: 5px;
+`;
+
+const Bar = styled.div`
+  width: 8px;
+  height: 20px;
+  background-color: ${(props) => props.color || 'transparent'};
+
+  border: ${(props) => (props.color ? 'none' : '2px solid white')};
+`;
+const StrengthContainer = styled.div`
+ 
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap:10
+`;
+
+
+
+
+const StrengthText = styled.span`
+  color: white;
+  font-size: 16px;
+  font-weight: bold;
+  margin-right:5px
+`;
+
+const PasswordStrength = ({ level }) => {
+  const levels = {
+    'too weak': { text: 'TOO WEAK!', color: colors.tooWeak, bars: 1 },
+    weak: { text: 'WEAK', color: colors.weak, bars: 2 },
+    medium: { text: 'MEDIUM', color: colors.medium, bars: 3 },
+    strong: { text: 'STRONG', color: colors.strong, bars: 4 },
+  };
+
+  const { text, color, bars } = levels[level] || levels['too weak'];
+
+  return (
+<StrengthContainer>
+<StrengthText>{text}</StrengthText>
+      <BarsContainer>
+        {[...Array(4)].map((_, index) => (
+           <Bar key={index} color={index < bars ? color : ''} />
+        ))}
+      </BarsContainer>
+      </StrengthContainer>
+
+  );
+};
 function App() {
   return (
     <Wrapper>
@@ -222,9 +293,9 @@ function App() {
             </CheckBoxOptionsContainer>
             <PasswordStrengthSection>
               <p>STRENGTH</p>
-              
+              <PasswordStrength level={'too weak'} />
             </PasswordStrengthSection>
-            <GenerateButton>Generate <FaArrowRight color={colors.background} /> </GenerateButton>
+            <GenerateButton>Generate <ArrowRightIcon/> </GenerateButton>
           </PasswordSettings>
         </Main>
       </AppContainer>
