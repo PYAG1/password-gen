@@ -12,10 +12,6 @@ const colors = {
   red: "#F64A4A",
   orange: "#FB7C58",
   yellow: "#F8CD65",
-  tooWeak: '#F64A4A',
-  weak: '#FB7C58',
-  medium: '#F8CD65',
-  strong: '#A4FFAF',
 };
 
 const Wrapper = styled.div`
@@ -90,7 +86,7 @@ const CopyButton = styled.button`
 `;
 const FlexComponent = styled.section<{ $space?: boolean }>`
   display: flex;
-  width: 100%; /* Ensures full width for flex items */
+  width: 100%; 
   flex-direction: row;
   justify-content: ${(props) =>
     props.$space ? "space-between" : "flex-start"};
@@ -118,16 +114,16 @@ const GenerateButton = styled.button`
   padding: 1em 0;
   margin-top: 1em;
   gap: 15px;
-  cursor: pointer; /* Make it clickable */
-  transition: background-color 0.2s ease-in-out, box-shadow 0.2s ease-in-out; /* Smooth transitions */
+  cursor: pointer;
+  transition: background-color 0.2s ease-in-out, box-shadow 0.2s ease-in-out; 
 
   &:hover {
-    background-color: transparent; /* Semi-transparent green on hover */
+    background-color: transparent; 
     border: 2px solid ${colors.green};
     color: ${colors.green};
 
     svg path {
-      fill: #A4FFAF; /* Change arrow color on hover */
+      fill: #A4FFAF;
     }
   }
 `;
@@ -241,15 +237,15 @@ const StrengthText = styled.span`
   color: white;
   font-size: 16px;
   font-weight: bold;
-  margin-right:5px
+  margin-right:10px
 `;
 
 const PasswordStrength = ({ level }) => {
   const levels = {
-    'too weak': { text: 'TOO WEAK!', color: colors.tooWeak, bars: 1 },
-    weak: { text: 'WEAK', color: colors.weak, bars: 2 },
-    medium: { text: 'MEDIUM', color: colors.medium, bars: 3 },
-    strong: { text: 'STRONG', color: colors.strong, bars: 4 },
+  'too weak': { text: 'TOO WEAK!', color: colors.red, bars: 1 },
+    weak: { text: 'WEAK', color: colors.orange, bars: 2 },
+    medium: { text: 'MEDIUM', color: colors.yellow, bars: 3 },
+    strong: { text: 'STRONG', color: colors.green, bars: 4 },
   };
 
   const { text, color, bars } = levels[level] || levels['too weak'];
@@ -293,7 +289,7 @@ function App() {
             </CheckBoxOptionsContainer>
             <PasswordStrengthSection>
               <p>STRENGTH</p>
-              <PasswordStrength level={'too weak'} />
+              <PasswordStrength level={'strong'} />
             </PasswordStrengthSection>
             <GenerateButton>Generate <ArrowRightIcon/> </GenerateButton>
           </PasswordSettings>
