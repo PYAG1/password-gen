@@ -1,7 +1,6 @@
 import styled from "styled-components";
 import { colors } from "../constants";
 
-
 const BarsContainer = styled.div`
   display: flex;
   gap: 5px;
@@ -19,13 +18,13 @@ const StrengthContainer = styled.div`
   justify-content: space-between;
   align-items: center;
   gap: 10;
-`;
 
-const StrengthText = styled.span`
-  color: white;
-  font-size: 16px;
-  font-weight: bold;
-  margin-right: 10px;
+  p {
+    color: white;
+    font-size: 16px;
+    font-weight: bold;
+    margin-right: 10px;
+  }
 `;
 
 const PasswordStrength = ({ level }) => {
@@ -40,7 +39,7 @@ const PasswordStrength = ({ level }) => {
 
   return (
     <StrengthContainer>
-      <StrengthText>{text}</StrengthText>
+      <p>{text}</p>
       <BarsContainer>
         {[...Array(4)].map((_, index) => (
           <Bar key={index} color={index < bars ? color : ""} />
@@ -50,4 +49,4 @@ const PasswordStrength = ({ level }) => {
   );
 };
 
-export default PasswordStrength
+export default PasswordStrength;

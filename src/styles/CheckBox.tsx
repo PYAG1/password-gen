@@ -1,19 +1,17 @@
 import styled from "styled-components";
 import { colors } from "../constants";
 
-const CheckBoxTextItem = styled.p`
-  margin-left: 1em;
-`;
-
-const CheckBoxOptionsContainer = styled.section`
-  margin: 2em 0;
+export const CheckBoxOptionsContainer = styled.section`
+  margin-bottom: 2em;
   display: flex;
   flex-direction: column;
   gap: 15px;
-`;
 
-const CheckBoxInput = styled.input.attrs({ type: "checkbox" })`
-  width: 16px;
+  p{
+    margin-left: 1em;
+  }
+    input {
+     width: 16px;
   height: 16px;
   background: transparent;
   border: 2px solid ${colors.text};
@@ -41,5 +39,5 @@ const CheckBoxInput = styled.input.attrs({ type: "checkbox" })`
       transform: rotate(45deg);
     }
   }
+    }
 `;
-export default {CheckBoxInput,CheckBoxOptionsContainer,CheckBoxTextItem}
