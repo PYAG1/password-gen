@@ -148,7 +148,7 @@ function App() {
               <PasswordStrength level={strengthLabel} />
             </PasswordStrengthSection>
             <button onClick={generatePassword}>
-              Generate <ArrowRightIcon />
+             <p> Generate </p><ArrowRightIcon />
             </button>
           </PasswordSettings>
         </Main>

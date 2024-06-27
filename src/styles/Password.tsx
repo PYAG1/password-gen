@@ -45,6 +45,7 @@ export const PasswordSettings = styled.section`
     gap: 15px;
     cursor: pointer;
     transition: background-color 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+    color:${colors.background};
 
     &:hover {
       background-color: transparent;
